@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Bid } from './models/Bid';
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { generateBids } from './services/BidGenerationService';
 import { DeterminWinningBidderAndPrice } from './services/AuctionWinnerService';
 
@@ -26,7 +30,7 @@ export const App: React.SFC<AppProperties> = () => {
   const [ auctionReservePrice, setAuctionReservePrice ] = React.useState(140);
 
   const handleRunAuctionClick = () => {
-    const generatedBids = generateBids(numberOfBidders, numberOfBids, 90, 200);
+    const generatedBids = generateBids(numberOfBidders, numberOfBids, lowestBidPrice, highestBidPrice);
     const winningBid = DeterminWinningBidderAndPrice(120, generatedBids);
     setWinningBid(winningBid);
     setBids(generatedBids);
@@ -34,6 +38,14 @@ export const App: React.SFC<AppProperties> = () => {
 
   return (
     <React.Fragment>
+      <Container>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit">Vickery Auction Simulator!</Typography>
+            <Link href="https://github.com/michaelrivet/vickrey-auction" color="inherit">View on Github</Link>
+          </Toolbar>
+        </AppBar>
+      </Container>
       <Container>
         <TextField
           label="Number of Bidders"
@@ -72,10 +84,10 @@ export const App: React.SFC<AppProperties> = () => {
       </Container>
       <Container className="bidDisplay">
         {
-          !!winningBid.bidderId && <div>{`Winning Bidder: ${winningBid.bidderId} - Price Paid: ${winningBid.price}`}</div>
+          !!winningBid.bidderId && <div className="bidDisplay-winningBid">{`Winning Bidder: ${winningBid.bidderId} - Price Paid: ${winningBid.price}`}</div>
         }
         {
-          bids.map((bid, iter) => (<div key={iter}>{`${bid.bidderId} : ${bid.price}`}</div>))
+          bids.slice(0, 1000).map((bid, iter) => (<div className="bidDisplay-bid" key={iter}>{`${bid.bidderId} : ${bid.price}`}</div>))
         }
       </Container>
     </React.Fragment>

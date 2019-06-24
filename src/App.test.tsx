@@ -67,5 +67,43 @@ describe('the App component', () => {
       // Verify that the value has been updated after the change.
       expect(wrapper.find('#NumberOfBids').prop('value')).toBe(21);
     });
+
+    it('does not render more than 1000 bids', () => {
+      // Arrange
+      const wrapper = shallow(<App />);
+      const runButton = wrapper.find('#RunAuction');
+      // Mock the return value for generateBids to return 1001 "bids"
+      const generatedBids = Array.apply(null, Array(1001)).map(function (x, i) { return {bidderId: 1, price: i}; })
+      generateBids.mockReturnValue(generatedBids);
+
+      // Act
+      // Verify that the value is the default value
+      runButton.simulate('click');
+      wrapper.update();
+      
+      // Assert
+      // Verify that the value has been updated after the change.
+      expect(wrapper.find('.bidDisplay-bid')).toHaveLength(1000);
+    })
+
+    it('renders the winning bid information if it is provided', () => {
+      // Arrange
+      const wrapper = shallow(<App />);
+      const runButton = wrapper.find('#RunAuction');
+      // Mock the return value for DeterminWinningBidderAndPrice to return a bid
+      DeterminWinningBidderAndPrice.mockReturnValue({bidderId: 'foo', price: 100});
+      generateBids.mockReturnValue([]);
+
+      // Act
+      // Verify that the value is the default value
+      runButton.simulate('click');
+      wrapper.update();
+
+      // Assert
+      // Verify that the value has been updated after the change.
+      const winningBid = wrapper.find('.bidDisplay-winningBid');
+      expect(winningBid).not.toBeNull();
+      expect(winningBid.text()).toBe("Winning Bidder: foo - Price Paid: 100");
+    })
   });
 });
