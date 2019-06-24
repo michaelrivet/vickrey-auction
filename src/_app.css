@@ -1,0 +1,11 @@
+.bidDisplay {
+  margin: 20px 0;
+}
+
+.MuiAppBar-root {
+  margin-bottom: 20px;
+}
+
+.MuiToolbar-root {
+  justify-content: space-between;
+}
