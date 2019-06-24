@@ -31,7 +31,7 @@ export const App: React.SFC<AppProperties> = () => {
 
   const handleRunAuctionClick = () => {
     const generatedBids = generateBids(numberOfBidders, numberOfBids, lowestBidPrice, highestBidPrice);
-    const winningBid = DeterminWinningBidderAndPrice(120, generatedBids);
+    const winningBid = DeterminWinningBidderAndPrice(auctionReservePrice, generatedBids);
     setWinningBid(winningBid);
     setBids(generatedBids);
   };
