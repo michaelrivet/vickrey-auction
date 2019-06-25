@@ -5,7 +5,7 @@
   "private": false,
   "license": "MIT",
   "repository": "github:michaelrivet/vickrey-auction",
-  "homepage": "http://www.michaelrivet.rocks/vickrey-auction/",
+  "homepage": "http://www.michaelrivet.rocks/mui-dls/",
   "description": "A starter template project for bootstrapping new React applications using TypeScript",
   "author": "Mike Rivet (https://github.com/michaelrivet/)",
   "dependencies": {
