@@ -9,3 +9,7 @@
 .MuiToolbar-root {
   justify-content: space-between;
 }
+
+.MuiButton-root {
+  margin: 0 15px 15px 0;
+}
