@@ -1,17 +1,26 @@
 import * as React from 'react';
-import MuiButton from '@material-ui/core/Button';
+import MuiButton, { ButtonProps as MuiButtonProps } from '@material-ui/core/Button';
 
-type ButtonProps = {
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+type ButtonProps = React.ComponentPropsWithoutRef<"button"> & Omit<MuiButtonProps, 'variant'> & {
   variant: 'primary' | 'secondary',
-  children: React.ReactElement | string | number,
-  className?: string | undefined,
-  disabled?: boolean,
 }
 
 const Button = (props: ButtonProps) => {
   const muiVariant = props.variant === 'primary' ? 'contained' : 'outlined';
 
-  return <MuiButton disableRipple variant={muiVariant} color="primary" className={props.className} disabled={props.disabled}>{props.children}</MuiButton>
+  const { variant, color, children, disableRipple = true, ...baseProps} = props;
+
+  return (
+    <MuiButton 
+      disableRipple={disableRipple} 
+      variant={muiVariant} 
+      color={props.color || 'primary'} 
+      {...baseProps}
+    >
+      {props.children}
+    </MuiButton>)
 }
 
 export { Button }

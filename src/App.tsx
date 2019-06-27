@@ -34,7 +34,6 @@ export const App: React.SFC<AppProperties> = () => {
           </Container>
         </ThemeProvider>
 
-        <AppUsingMui />
         <AppUsingWrappers />
           
       </StylesProvider>

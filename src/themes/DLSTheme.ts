@@ -22,10 +22,16 @@ const dlsTheme = createMuiTheme({
     },
     MuiButton: {
       root: {
+        textTransform: 'none',
         fontWeight: 700,
-        padding: '15px 30px',
+        padding: '11px 30px',
+        minWidth: 220,
       },
       // None
+      label: {
+        fontSize: '1rem',
+        letterSpacing: '0.025rem',
+      },
       text: {
         padding: '15px 30px',
       },
@@ -67,7 +73,7 @@ const dlsTheme = createMuiTheme({
         borderRadius: 3,
         border: 0,
         color: 'white',
-        padding: '12px 30px',
+        padding: '8px 30px',
         boxShadow: 'none',
       },
       outlinedPrimary: {
